@@ -14,7 +14,7 @@ client = tweepy.Client(
 
 # Şu anki zaman ve hedef tarih
 now = datetime.now()
-deadline = datetime(2028, 7, 2, 16, 30)
+deadline = datetime(2027, 3, 17, 16, 30)
 
 # Zaman farkı
 delta = relativedelta(deadline, now)
