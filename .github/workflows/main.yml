@@ -1,0 +1,32 @@
+name: Günlük Geri Sayım Tweeti
+
+on:
+  schedule:
+    - cron: "15 13 * * *"  # Her gün 13:15 UTC (16:15 GMT+3)
+  workflow_dispatch:
+
+jobs:
+  tweet:
+    runs-on: ubuntu-latest
+
+    env:
+      CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
+      CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+      BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
+
+    steps:
+      - name: Repo'yu klonla
+        uses: actions/checkout@v3
+
+      - name: Python kur
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Gerekli paketleri yükle
+        run: pip install tweepy python-dateutil
+
+      - name: Tweet scriptini çalıştır
+        run: python tweet.py
